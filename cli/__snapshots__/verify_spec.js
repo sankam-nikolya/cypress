@@ -87,21 +87,6 @@ Opening Cypress...
 
 `
 
-exports['current version has not been verified 2'] = `
-Found binary version 7.8.9 installed in: /cache/Cypress/1.2.3/Cypress.app
-
-⚠ Warning: Binary version 7.8.9 does not match the expected package version 1.2.3
-
-  These versions may not work properly together.
-
-It looks like this is your first time using Cypress: 7.8.9
-
- ✔  Verified Cypress! /cache/Cypress/1.2.3/Cypress.app
-
-Opening Cypress...
-
-`
-
 exports['no welcome message 1'] = `
 Found binary version 7.8.9 installed in: /cache/Cypress/1.2.3/Cypress.app
 
@@ -217,26 +202,6 @@ exports['silent verify 1'] = `
 [no output]
 `
 
-exports['fails with no stderr 1'] = `
-Error: Cypress failed to start.
-
-This is usually caused by a missing library or dependency.
-
-The error below should indicate which dependency is missing.
-
-https://on.cypress.io/required-dependencies
-
-If you are using Docker, we provide containers with all required dependencies installed.
-----------
-
-Error: EPERM NOT PERMITTED
-----------
-
-Platform: darwin (Foo-OsVersion)
-Cypress Version: 1.2.3
-
-`
-
 exports['no Cypress executable 1'] = `
 Error: No version of Cypress is installed in: /cache/Cypress/1.2.3/Cypress.app
 
@@ -279,5 +244,25 @@ It looks like this is your first time using Cypress: 7.8.9
  ✔  Verified Cypress! /cache/Cypress/1.2.3/Cypress.app
 
 Opening Cypress...
+
+`
+
+exports['fails with no stderr 1'] = `
+Error: Cypress failed to start.
+
+This is usually caused by a missing library or dependency.
+
+The error below should indicate which dependency is missing.
+
+https://on.cypress.io/required-dependencies
+
+If you are using Docker, we provide containers with all required dependencies installed.
+----------
+
+Error: EPERM NOT PERMITTED
+----------
+
+Platform: darwin (Foo-OsVersion)
+Cypress Version: 1.2.3
 
 `
