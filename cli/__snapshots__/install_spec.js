@@ -1,13 +1,3 @@
-exports['version already installed 1'] = `
-Cypress 1.2.3 is already installed in /cache/Cypress/1.2.3
-
-Skipping installation:
-
-  Pass the --force option if you'd like to reinstall anyway.
-
-
-`
-
 exports['skip installation 1'] = `
 Note: Skipping binary installation: Environment variable CYPRESS_INSTALL_BINARY = 0.
 
@@ -65,8 +55,6 @@ https://on.cypress.io/installing-cypress
 `
 
 exports['installed version does not match needed version 1'] = `
-Cypress x.x.x is already installed in /cache/Cypress/1.2.3
-
 Installing Cypress (version: 1.2.3)
 
  ✔  Downloaded Cypress
@@ -81,8 +69,6 @@ https://on.cypress.io/installing-cypress
 `
 
 exports['forcing true always installs 1'] = `
-Cypress 1.2.3 is already installed in /cache/Cypress/1.2.3
-
 Installing Cypress (version: 1.2.3)
 
  ✔  Downloaded Cypress
@@ -97,8 +83,6 @@ https://on.cypress.io/installing-cypress
 `
 
 exports['warning installing as global 1'] = `
-Cypress x.x.x is already installed in /cache/Cypress/1.2.3
-
 Installing Cypress (version: 1.2.3)
 
  ✔  Downloaded Cypress
@@ -163,5 +147,18 @@ Cypress Version: 1.2.3
 `
 
 exports['silent install 1'] = `
+[no output]
+`
+
+exports['version already installed - CI 1'] = `
+Cypress 1.2.3 is already installed in /cache/Cypress/1.2.3
+
+Skipping installation:
+
+  Pass the --force option if you'd like to reinstall anyway.
+
+`
+
+exports['version already installed - locally 1'] = `
 [no output]
 `

@@ -115,18 +115,38 @@ describe('/lib/tasks/install', function () {
         beforeEach(function () {
           state.getBinaryPkgVersionAsync.resolves(packageVersion)
 
-          return install.start()
         })
 
-        it('logs noop message', function () {
-          expect(state.getBinaryPkgVersionAsync).to.be.calledWith('/cache/Cypress/1.2.3/Cypress.app')
+        it('logs skipping message in CI', function () {
+          util.isCi.returns(true)
 
-          expect(download.start).not.to.be.called
+          return install.start()
+          .then(() => {
+            expect(state.getBinaryPkgVersionAsync).to.be.calledWith('/cache/Cypress/1.2.3/Cypress.app')
 
-          snapshot(
-            'version already installed',
-            normalize(this.stdout.toString())
-          )
+            expect(download.start).not.to.be.called
+
+            return snapshot(
+              'version already installed - CI',
+              normalize(this.stdout.toString())
+            )
+          })
+
+        })
+
+        it('logs nothing locally', function () {
+
+          return install.start()
+          .then(() => {
+            expect(state.getBinaryPkgVersionAsync).to.be.calledWith('/cache/Cypress/1.2.3/Cypress.app')
+
+            expect(download.start).not.to.be.called
+
+            snapshot(
+              'version already installed - locally',
+              normalize(`[no output]${this.stdout.toString()}`)
+            )
+          })
         })
       })
 
