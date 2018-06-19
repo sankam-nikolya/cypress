@@ -17,7 +17,7 @@ const logger = require('../logger')
 const { throwFormErrorText, errors } = require('../errors')
 
 const alreadyInstalledMsg = () => {
-  if (util.isCi()) {
+  if (!util.isPostInstall()) {
     logger.log(stripIndent`    
       Skipping installation:
   
@@ -203,12 +203,12 @@ const start = (options = {}) => {
     }
 
     debug('installed version is', binaryVersion, 'version needed is', needVersion)
-    if (util.isCi()) {
-      logger.log(stripIndent`
+
+    logger.log()
+    logger.log(stripIndent`
       Cypress ${chalk.green(binaryVersion)} is already installed in ${chalk.cyan(installDir)}
       `)
-      logger.log()
-    }
+    logger.log()
 
     if (options.force) {
       debug('performing force install over existing binary')

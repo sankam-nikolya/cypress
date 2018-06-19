@@ -44,6 +44,7 @@ describe('/lib/tasks/install', function () {
 
       // sinon.stub(os, 'tmpdir').returns('/tmp')
       sinon.stub(util, 'isCi').returns(false)
+      sinon.stub(util, 'isPostInstall').returns(false)
       sinon.stub(util, 'pkgVersion').returns(packageVersion)
       sinon.stub(download, 'start').resolves(packageVersion)
       sinon.stub(unzip, 'start').resolves()
@@ -117,34 +118,33 @@ describe('/lib/tasks/install', function () {
 
         })
 
-        it('logs skipping message in CI', function () {
-          util.isCi.returns(true)
-
+        it('doesn\'t attempt to download', function () {
           return install.start()
           .then(() => {
-            expect(state.getBinaryPkgVersionAsync).to.be.calledWith('/cache/Cypress/1.2.3/Cypress.app')
-
             expect(download.start).not.to.be.called
+            expect(state.getBinaryPkgVersionAsync).to.be.calledWith('/cache/Cypress/1.2.3/Cypress.app')
+          })
 
+        })
+
+        it('logs \'skipping install\' when explicit cypress install', function () {
+          return install.start()
+          .then(() => {
             return snapshot(
-              'version already installed - CI',
+              'version already installed - cypress install',
               normalize(this.stdout.toString())
             )
           })
 
         })
 
-        it('logs nothing locally', function () {
-
+        it('logs when already installed when run from postInstall', function () {
+          util.isPostInstall.returns(true)
           return install.start()
           .then(() => {
-            expect(state.getBinaryPkgVersionAsync).to.be.calledWith('/cache/Cypress/1.2.3/Cypress.app')
-
-            expect(download.start).not.to.be.called
-
             snapshot(
-              'version already installed - locally',
-              normalize(`[no output]${this.stdout.toString()}`)
+              'version already installed - postInstall',
+              normalize(this.stdout.toString())
             )
           })
         })

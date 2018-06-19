@@ -235,6 +235,10 @@ const util = {
     return cachedir('Cypress')
   },
 
+  isPostInstall () {
+    return process.env.npm_lifecycle_event === 'postinstall'
+  },
+
   exec: execa,
 
   stdoutLineMatches,
