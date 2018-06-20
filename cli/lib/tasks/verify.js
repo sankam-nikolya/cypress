@@ -21,11 +21,7 @@ const checkExecutable = (binaryDir) => {
   .then((isExecutable) => {
     debug('Binary is executable? :', isExecutable)
     if (!isExecutable) {
-      return throwFormErrorText(errors.missingApp(executable))(stripIndent`
-          Failed to gain executable permissions on the Cypress binary at ${executable}.
-
-          Check that you have both downloaded and executed Cypress as the same User with the same permissions.
-          `)
+      return throwFormErrorText(errors.binaryNotExecutable(executable))()
     }
   })
   .catch({ code: 'ENOENT' }, () => {

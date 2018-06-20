@@ -217,14 +217,14 @@ Cypress Version: 1.2.3
 `
 
 exports['Cypress non-executable permissions 1'] = `
-Error: No version of Cypress is installed in: /cache/Cypress/1.2.3/Cypress.app/Contents/MacOS/Cypress
+Error: Cypress cannot run because the binary does not have executable permissions: /cache/Cypress/1.2.3/Cypress.app/Contents/MacOS/Cypress
 
-Please reinstall Cypress by running: cypress install
-----------
+Reasons this may happen:
 
-Failed to gain executable permissions on the Cypress binary at /cache/Cypress/1.2.3/Cypress.app/Contents/MacOS/Cypress.
+- node was installed as 'root' or with 'sudo'
+- the cypress npm package as 'root' or with 'sudo'
 
-Check that you have both downloaded and executed Cypress as the same User with the same permissions.
+Please check that you have the appropriate user permissions.
 ----------
 
 Platform: darwin (Foo-OsVersion)
