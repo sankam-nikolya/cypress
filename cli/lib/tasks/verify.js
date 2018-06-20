@@ -31,6 +31,9 @@ const isMissingExecutable = (binaryDir) => {
   return fs.pathExistsAsync(executable)
   .then((exists) => {
     if (!exists) {
+      if (util.isCi()) {
+        return throwFormErrorText(errors.notInstalledCI(executable))()
+      }
       return throwFormErrorText(errors.missingApp(binaryDir))(stripIndent`
       Cypress executable not found at: ${chalk.cyan(executable)}
     `)

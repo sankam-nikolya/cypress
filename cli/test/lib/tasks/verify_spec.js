@@ -367,14 +367,29 @@ context('lib/tasks/verify', function () {
         sinon.stub(state, 'getBinaryVerifiedAsync').resolves(false)
         util.isCi.returns(true)
 
-        return verify.start({ force: true })
       })
 
       it('uses verbose renderer', function () {
-        snapshot(
-          'verifying in ci',
-          normalize(this.stdout.toString())
-        )
+        return verify.start({ force: true })
+        .then(() => {
+          snapshot(
+            'verifying in ci',
+            normalize(this.stdout.toString())
+          )
+        })
+      })
+
+      it('logs error when binary not found', function () {
+        fs.pathExistsAsync.resolves(false)
+        return verify.start({ force: true })
+        .then(() => { throw new Error('Should have thrown') })
+        .catch((err) => {
+          logger.error(err)
+          snapshot(
+            'error binary not found in ci',
+            normalize(this.stdout.toString())
+          )
+        })
       })
     })
 

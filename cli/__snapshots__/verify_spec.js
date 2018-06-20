@@ -222,3 +222,25 @@ Cypress Version: 1.2.3
 exports['silent verify 1'] = `
 [no output]
 `
+
+exports['error binary not found in ci 1'] = `
+Error: The cypress npm package is installed, but the Cypress binary is missing.
+
+We expected the binary to be installed here: /cache/Cypress/1.2.3/Cypress.app/executable
+
+Reasons it may be missing:
+
+- You're caching 'node_modules' but are not caching this path: /home/owner/.cache/Cypress
+- You ran 'npm install' at an earlier build step but did not persist: /home/owner/.cache/Cypress
+
+Properly caching the binary will fix this error and avoid downloading and unzipping Cypress.
+
+Alternatively, you can run 'cypress install' to download the binary again.
+
+https://on.cypress.io/not-installed-ci-error
+----------
+
+Platform: darwin (Foo-OsVersion)
+Cypress Version: 1.2.3
+
+`
